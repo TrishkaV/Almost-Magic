@@ -1,4 +1,4 @@
-Hello, this is a solver for the Jane Street's April logic puzzle, named "Almost Magic"!
+Hello, this is a solver for the Jane Street's April 2022 logic puzzle, named "Almost Magic"!
 
 The puzzle can be found here --> https://tinyurl.com/almost-magic-puzzle
 
