@@ -2,6 +2,7 @@ mod square_methods;
 use square_methods::{
     populate_first_square, populate_fourth_square, populate_second_square, populate_third_square,
 };
+use indicatif::ProgressBar;
 #[cfg(debug_assertions)]
 use std::env;
 #[cfg(not(debug_assertions))]
@@ -15,6 +16,17 @@ fn main() {
     #[cfg(not(debug_assertions))]
     print_welcome_message();
 
+    let progress_bar = ProgressBar::new_spinner();
+    progress_bar.set_message(format!("Running..."));
+    progress_bar.enable_steady_tick(100);
+    let populator = run_populator();
+    progress_bar.finish_and_clear();
+
+    #[cfg(not(debug_assertions))]
+    print_goodbye_message();
+}
+
+fn run_populator() -> bool {
     let mut total_sum: u32 = 0;
     let mut first_square: [u32; 9];
     let mut second_square: Option<[u32; 9]>;
@@ -55,9 +67,10 @@ fn main() {
         println!("Square n.3 --> {:?}", third_square.unwrap());
         println!("Square n.4 --> {:?}", fourth_square.unwrap());
     }
+
     println!("Total sum  --> {}, OK!\n", total_sum);
-    #[cfg(not(debug_assertions))]
-    print_goodbye_message();
+
+    true
 }
 
 fn get_second(first: [u32; 9]) -> Option<[u32; 9]> {
@@ -96,7 +109,6 @@ fn print_welcome_message() {
     println!("\nThe target is set to a total elements sum of < 1111.");
     println!("\nPress enter to begin...");
     let _a = stdin().lock().read_line(&mut String::new());
-    println!("Running...");
 }
 
 #[cfg(not(debug_assertions))]
